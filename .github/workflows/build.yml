@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        runtime:
+          - win-x64
+          - win-x86
+          - win-arm64
+          - linux-x64
+          - linux-musl-x64
+          - linux-arm
+          - linux-arm64
+          - osx-x64
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Build the program
+        run: |
+          dotnet publish src -c Release -o build --sc false -r ${{ matrix.runtime }} \
+            -p:PublishSingleFile=true -p:DebugType=none
+
+      - name: Copy essential files
+        run: |
+          cp LICENSE README.md build
+
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: novelcraft-agent-${{ env.VERSION }}-${{ matrix.runtime }}
+          path: build
