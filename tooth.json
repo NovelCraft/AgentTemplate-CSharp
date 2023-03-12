@@ -1,0 +1,41 @@
+{
+    "format_version": 1,
+    "tooth": "github.com/novelcraft/agenttemplate-dotnet",
+    "version": "0.0.1",
+    "information": {
+        "name": "NovelCraft Agent Template for .NET",
+        "description": "This is a template for creating a NovelCraft agent in .NET",
+        "author": "NovelCraft",
+        "repository": "github.com/novelcraft/AgentTemplate-DotNet"
+    },
+    "placement": [
+        {
+            "source": "sdk/*",
+            "destination": "sdk/*"
+        },
+        {
+            "source": "src/*",
+            "destination": "src/*"
+        },
+        {
+            "source": ".gitattributes",
+            "destination": ".gitattributes"
+        },
+        {
+            "source": ".gitignore",
+            "destination": ".gitignore"
+        },
+        {
+            "source": ".gitmodules",
+            "destination": ".gitmodules"
+        },
+        {
+            "source": "Agent.sln",
+            "destination": "Agent.sln"
+        },
+        {
+            "source": "omnisharp.json",
+            "destination": "omnisharp.json"
+        }
+    ]
+}
