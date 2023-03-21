@@ -38,12 +38,33 @@ jobs:
           dotnet publish src -c Release -o build --sc false -r ${{ matrix.runtime }} \
             -p:PublishSingleFile=true -p:DebugType=none
 
-      - name: Copy essential files
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: novelcraft-agent-${{ matrix.runtime }}
+          path: build
+
+  build_for_docker:
+    name: Build for Docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build Docker image
         run: |
-          cp LICENSE README.md build
+          docker build -t novelcraft-agent:latest .
+
+      - name: Save Docker image
+        run: |
+          mkdir -p build
+          docker save novelcraft-agent:latest > build/novelcraft-agent.tar
 
       - name: Upload the artifact
         uses: actions/upload-artifact@v3
         with:
-          name: novelcraft-agent-${{ env.VERSION }}-${{ matrix.runtime }}
+          name: novelcraft-agent-docker
           path: build
