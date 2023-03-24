@@ -1,17 +1,12 @@
-FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
-
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS publish
-WORKDIR /repo
 COPY . .
-RUN dotnet publish "src/Agent.csproj" -c Release -o /publish /p:UseAppHost=false
+RUN dotnet publish "src/Agent.csproj" -c Release -o build
 
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/runtime:7.0 AS runtime-env
 WORKDIR /app
-COPY --from=publish /publish .
-ENTRYPOINT ["dotnet", "Agent.dll"]
+
+COPY --from=build-env /app/build .
+
+ENTRYPOINT ["/app/Agent"]
