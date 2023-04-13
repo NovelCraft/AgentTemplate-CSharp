@@ -1,12 +1,12 @@
 {
     "format_version": 1,
-    "tooth": "github.com/novelcraft/agenttemplate-dotnet",
-    "version": "0.0.3",
+    "tooth": "github.com/novelcraft/agenttemplate-csharp",
+    "version": "0.1.0",
     "information": {
-        "name": "NovelCraft Agent Template for .NET",
-        "description": "This is a template for creating a NovelCraft agent in .NET",
+        "name": "NovelCraft C# Agent Template",
+        "description": "A template for creating a NovelCraft Agent in C#",
         "author": "NovelCraft",
-        "repository": "github.com/novelcraft/AgentTemplate-DotNet"
+        "repository": "github.com/novelcraft/AgentTemplate-CSharp"
     },
     "placement": [
         {
