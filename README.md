@@ -1,6 +1,6 @@
-# NovelCraft Agent Template for .NET
+# NovelCraft Agent Template for C#
 
-This is a template for creating a NovelCraft agent in .NET.
+This is a template for creating a NovelCraft agent in C#.
 
 ## Usage
 
@@ -14,8 +14,10 @@ This is a template for creating a NovelCraft agent in .NET.
 
 5. Run your agent by running `dotnet run --project src/Agent.csproj` in the root directory.
 
+    To connect to a server other than `localhost:14514` with a different token, run `dotnet run --project src/Agent.csproj -- --host <server> --port <port> --token <token>`.
+
 6. Publish your agent by running `dotnet publish -c Release -o build --sc false -p:PublishSingleFile=true -p:DebugType=none` in the root directory.
 
 ## License
 
-This template is licensed under the Unlicense License. See [LICENSE](LICENSE) for details.
+[Unlicense](https://choosealicense.com/licenses/unlicense/)
