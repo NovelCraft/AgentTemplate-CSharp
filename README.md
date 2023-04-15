@@ -18,6 +18,8 @@ This is a template for creating a NovelCraft agent in C#.
 
 6. Publish your agent by running `dotnet publish -c Release -o build --sc false -p:PublishSingleFile=true -p:DebugType=none` in the root directory.
 
+For further instructions, refer to [the documentation](https://novelcraft.games).
+
 ## License
 
 [Unlicense](https://choosealicense.com/licenses/unlicense/)
