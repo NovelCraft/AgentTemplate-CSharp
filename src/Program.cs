@@ -3,13 +3,22 @@
 Sdk.Initialize(args);
 Sdk.Logger.Info("Hello World!");
 
-while (true)
-{
-    var agent = Sdk.Agent;
+var lastJumpTime = DateTime.Now;
 
-    if (agent is null) {
-        continue;
-    }
+while (true) {
+  var agent = Sdk.Agent;
 
+  if (agent is null) {
+    continue;
+  }
+
+  if (agent.Movement is not IAgent.MovementKind.Forward) {
     agent.Movement = IAgent.MovementKind.Forward;
+  }
+
+  if (DateTime.Now - lastJumpTime > TimeSpan.FromSeconds(1)) {
+    agent.Jump();
+
+    lastJumpTime = DateTime.Now;
+  }
 }
